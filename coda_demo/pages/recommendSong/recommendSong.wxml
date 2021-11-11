@@ -1,0 +1,9 @@
+<view class="recommendSongContainer">
+  <view class="header">
+    <image src="/static/images/recommendSong/recommendSong.jpg"></image>
+    <view class="date">
+      <test class="day">11 / </test>
+      <test class="month">11</test>
+    </view>
+  </view>
+</view>

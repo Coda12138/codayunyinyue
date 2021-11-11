@@ -39,10 +39,11 @@
           id="{{item.data.vid}}"
           poster="{{item.data.coverUrl}}"
           class="common"
-          object-fit="cover"
+          object-fit="fill"
           wx:if='{{videoId === item.data.vid}}'
           bindtimeupdate="handleTimeUpdate"
           bindended="handleEnded"
+          autoplay="true"
       ></video>
 
       <!-- 性能优化：使用image图片代替video标签 -->
