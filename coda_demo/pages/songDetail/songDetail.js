@@ -1,44 +1,24 @@
-// pages/recommendSong/recommendSong.js
-import request from '../../utils/request.js'
+// pages/songDetail/songDetail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    day: '',
-    month: '',
-    recommendList: []
+    isPlay: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let userInfo = wx.getStorageSync('userInfo');
-    if(!userInfo) {
-      wx.showToast({
-        title: '请先登录',
-        icon: 'none',
-        success: () => {
-          wx.reLaunch({
-            url: '/pages/login/login'
-          })
-        }
-      })
-    }
-    this.setData({
-      day: new Date().getDate(),
-      month: new Date().getMonth() + 1
-    })
 
-    this.getRecommendList();
   },
 
-  async getRecommendList() {
-    let recommendListData = await request('/recommend/songs');
+  handleMusicPlay() {
+    let isPlay = !this.data.isPlay;
     this.setData({
-      recommendList: recommendListData.recommend
+      isPlay
     })
   },
 
