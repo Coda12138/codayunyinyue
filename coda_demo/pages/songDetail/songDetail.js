@@ -1,4 +1,5 @@
 // pages/songDetail/songDetail.js
+import request from '../../utils/request.js'
 Page({
 
   /**
@@ -6,15 +7,27 @@ Page({
    */
   data: {
     isPlay: false,
+    song: {},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let musicId = options.musicId;
+    this.getMusicInfo(musicId);
   },
 
+  async getMusicInfo(ids) {
+    let songData = await request('/song/detail',{ids});
+    this.setData({
+      song: songData.songs[0]
+    })
+
+    wx.setNavigationBarTitle({
+      title: this.data.song.name
+    })
+  },
   handleMusicPlay() {
     let isPlay = !this.data.isPlay;
     this.setData({
