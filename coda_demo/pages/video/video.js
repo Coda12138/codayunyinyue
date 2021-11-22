@@ -100,6 +100,12 @@ Page({
     console.log("下拉刷新火热开发中");
   },
 
+  toSearch() {
+    wx.navigateTo({
+      url: '/pages/search/search',
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

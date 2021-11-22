@@ -1,11 +1,14 @@
-// pages/songDetail/songDetail.js
+import request from '../../../utils/request'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    person: {
+      userName: 'Coda',
+      age: 18
+    }
   },
 
   /**
@@ -13,6 +16,18 @@ Page({
    */
   onLoad: function (options) {
 
+  },
+
+  handleGetOpenId() {
+    //1.获取登录凭证
+    wx.login({
+      success: async (res) => {
+        let code = res.code;
+        //2.将登录凭证发送给服务器
+        let result = await request('/getOpenId', {code});
+        console.log(result);
+      }
+    })
   },
 
   /**

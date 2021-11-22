@@ -1,4 +1,5 @@
 import request from '../../utils/request'
+let isSend = false
 Page({
 
   /**
@@ -6,7 +7,10 @@ Page({
    */
   data: {
     placeholderContent: '',
-    hotList: []
+    hotList: [],
+    searchContent: '',
+    searchList: [],
+    historyList: [],
   },
 
   /**
@@ -14,6 +18,7 @@ Page({
    */
   onLoad: function (options) {
     this.getInitData();
+    this.getSearchHistory();
   },
 
   async getInitData() {
@@ -22,6 +27,74 @@ Page({
     this.setData({
       placeholderContent: placeholderData.data.showKeyword,
       hotList: hotListData.data
+    })
+  },
+
+  getSearchHistory() {
+    let historyList = wx.getStorageSync('searchHistory');
+    if(historyList) {
+      this.setData({
+        historyList
+      })
+    }
+  },
+
+  handleInputChange(event) {
+    this.setData({
+      searchContent: event.detail.value.trim()
+    })
+    
+    if(isSend) return;
+    isSend = true;
+    this.getSearchList();
+    //节流
+    setTimeout(async ()=> {
+      isSend = false;
+    }, 300);
+  },
+
+  async getSearchList() {
+    if(!this.data.searchContent){
+      this.setData({
+        searchList: []
+      })
+      return;
+    }
+    let {searchContent, historyList} = this.data;
+    let searchListData = await request('/search', {keywords: this.data.searchContent, limit: 10});
+    this.setData({
+      searchList: searchListData.result.songs
+    });
+
+    if(historyList.indexOf(searchContent) !== -1) {
+      historyList.splice(historyList.indexOf(searchContent), 1);
+    }
+    historyList.unshift(searchContent);
+
+    this.setData({
+      historyList
+    });
+    wx.setStorageSync('searchHistory', historyList);
+  },
+
+  clearSearchContent() {
+    this.setData({
+      searchContent: '',
+      searchList: []
+    })
+  },
+
+  deleteSearchHistory() {
+    wx.showModal({
+     content: '确认删除吗？',
+     success: (res) => {
+        if(res.confirm) {
+          this.setData({
+            historyList: []
+          });
+          wx.removeStorageSync('searchHistory');
+        }
+     }
     })
   },
 

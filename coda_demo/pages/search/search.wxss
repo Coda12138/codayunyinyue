@@ -17,6 +17,14 @@
   border-radius: 30rpx;
 }
 
+.clear {
+  position: absolute;
+  right: 30rpx;
+  z-index: 10;
+  top: 0;
+  font-size: 30rpx;
+}
+
 .cancel {
   width: 100rpx;
   text-align: center;
@@ -64,4 +72,54 @@
   width: 35rpx;
   height: 20rpx;
   margin-left: 10rpx;
+}
+
+.searchContent {
+  color: #00BFFF;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 24rpx;
+  border-bottom: 1rpx solid #00BFFF;
+}
+
+.searchItem {
+  height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
+}
+.searchItem .content {
+  flex: 1;
+  margin-left: 20rpx;
+  border-bottom: 1rpx solid #eee;
+  font-size: 26rpx;
+}
+
+.history {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 50rpx;
+  margin: 20rpx 0;
+}
+
+.history .title {
+  height: 50rpx;
+  font-size: 28rpx;
+}
+
+.history .historyItem {
+  height: 50rpx;
+  font-size: 26rpx;
+  background-color: #eee;
+  margin-left: 20rpx;
+  margin-bottom: 20rpx;
+  padding: 0 30rpx;
+  border-radius: 20rpx;
+}
+
+.delete {
+  position: absolute;
+  bottom: 10rpx;
+  right: 15rpx;
+  font-size: 36rpx;
 }

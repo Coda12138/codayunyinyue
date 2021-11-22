@@ -1,12 +1,33 @@
 {
   "pages": [
-    "pages/recommendSong/recommendSong",
-    "pages/songDetail/songDetail",
     "pages/index/index",
+    "pages/search/search",
     "pages/video/video",
     "pages/personal/personal",
     "pages/login/login"
   ],
+  "subPackages": [
+    {
+      "root": "songPackage",
+      "pages": [
+        "pages/recommendSong/recommendSong",
+        "pages/songDetail/songDetail"
+      ]
+    },
+    {
+      "root": "otherPackage",
+      "pages": [
+        "pages/other/other"
+      ],
+      "independent": true
+    }
+  ],
+  "preloadRule": {
+    "pages/index/index": {
+      "packages": ["songPackage"]
+    }
+  },
+  "requiredBackgroundModes": ["audio"],
   "window": {
     "navigationBarBackgroundColor": "#00BFFF",
     "navigationBarTitleText": "Coda云音乐",
